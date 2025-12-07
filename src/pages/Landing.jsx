@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import bgImage from '../assets/bg.png';
 import frontBg from '../assets/front-bg.png';
@@ -10,6 +10,8 @@ import './Landing.css';
 function Landing() {
   const navigate = useNavigate();
   const cardRef = useRef(null);
+  const [noOffset, setNoOffset] = useState({ x: 0, y: 0 });
+  const [noClicks, setNoClicks] = useState(0);
 
   const handleTilt = (event) => {
     const card = cardRef.current;
@@ -37,6 +39,25 @@ function Landing() {
     card.style.setProperty('--tilt-x', '0deg');
     card.style.setProperty('--tilt-y', '0deg');
     card.style.setProperty('--tilt-scale', '1');
+  };
+
+  const dodgeNoButton = () => {
+    const maxX = 160;
+    const maxY = 120;
+    const x = (Math.random() * 2 - 1) * maxX;
+    const y = (Math.random() * 2 - 1) * maxY;
+    setNoOffset({ x, y });
+  };
+
+  const handleNoClick = (event) => {
+    event.preventDefault();
+    const nextCount = noClicks + 1;
+    if (nextCount >= 5) {
+      navigate('/no');
+      return;
+    }
+    setNoClicks(nextCount);
+    dodgeNoButton();
   };
 
   return (
@@ -97,7 +118,8 @@ function Landing() {
               className="btn"
               id="noButton"
               type="button"
-              onClick={() => navigate('/no')}
+              onClick={handleNoClick}
+              style={{ transform: `translate(${noOffset.x}px, ${noOffset.y}px)` }}
             >
               No
             </button>
