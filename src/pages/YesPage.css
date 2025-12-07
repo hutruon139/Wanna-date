@@ -1,0 +1,96 @@
+.yes-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: white;
+  animation: yes-bg 3s ease-in-out infinite alternate;
+}
+
+.yes-page h1 {
+  position: absolute;
+  top: 140px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin: 0;
+  z-index: 2;
+  text-align: center;
+  color: #5c0a00;
+}
+
+.heart {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  background-color: red;
+  height: 70px;
+  width: 70px;
+  animation: beat 1s infinite;
+  box-shadow: 10px 10px 20px #ff6347;
+  z-index: 2;
+}
+
+.heart:after {
+  background-color: red;
+  content: '';
+  border-radius: 50%;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: 0;
+  left: 35px;
+}
+
+.heart:before {
+  background-color: red;
+  content: '';
+  border-radius: 50%;
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: -35px;
+  left: 0;
+}
+
+.confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes yes-bg {
+  0% {
+    background: white;
+  }
+  50% {
+    background: rgb(201, 135, 175);
+  }
+  100% {
+    background: white;
+  }
+}
+
+@keyframes beat {
+  0% {
+    transform: translate(-50%, -50%) scale(1) rotate(-45deg);
+    background-color: rgb(255, 0, 0);
+    box-shadow: 5px 5px 30px white;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(0.75) rotate(-45deg);
+    background-color: rgb(255, 0, 0);
+    box-shadow: 5px 5px 30px white;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(-45deg);
+    background-color: rgb(255, 0, 0);
+    box-shadow: 5px 5px 30px white;
+  }
+}
